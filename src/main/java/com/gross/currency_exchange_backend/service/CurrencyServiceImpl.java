@@ -32,9 +32,13 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     @Override
     public CurrencyDTO getCurrencyByCode(String code) {
-        validateParameter(code, CODE_LENGTH,"Код валюты");
+        validateCurrencyCode(code);
         try {
-            return currencyMapper.toDto(currencyDAO.getCurrencyByCode(code));
+            Currency currency=currencyDAO.getCurrencyByCode(code);
+            if(currency!=null){
+                return currencyMapper.toDto(currency);
+            }else
+                throw new CustomServiceException("Валюта с кодом "+code+" не найдена", 404);
         } catch (SQLException e) {
             throw new CustomServiceException("Ошибка при получении валюты", 500);
         }
@@ -42,7 +46,7 @@ public class CurrencyServiceImpl implements CurrencyService {
 
     @Override
     public CurrencyDTO addCurrency(String code, String name, String sign) {
-        validateParameter(code, CODE_LENGTH, "Код валюты");
+        validateCurrencyCode(code);
         validateParameter(sign, SIGN_LENGTH, "Обозначение валюты");
         validateParameter(name, NAME_LENGTH, "Название валюты");
         Currency currency = new Currency(code, name, sign);
@@ -51,6 +55,12 @@ public class CurrencyServiceImpl implements CurrencyService {
         } catch (SQLException e) {
             throw new CustomServiceException("Ошибка при добавлении валюты", 500);
 
+        }
+    }
+
+    public void validateCurrencyCode(String code) {
+        if (code.length() != CODE_LENGTH) {
+            throw new CustomServiceException("Длина кода валют должна быть 3 символа, например: 'USD'", 400);
         }
     }
 

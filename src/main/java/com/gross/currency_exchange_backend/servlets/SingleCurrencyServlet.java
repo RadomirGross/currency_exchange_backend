@@ -31,12 +31,8 @@ public class SingleCurrencyServlet extends HttpServlet {
         String code = path.substring(1).toUpperCase();
         try {
             CurrencyDTO currencyDTO = currencyService.getCurrencyByCode(code);
-            if (currencyDTO == null) {
-                throw new CustomServiceException("Валюта с таким кодом не найдена", 404);
-            } else {
-                response.setStatus(200);
-                response.getWriter().write(jsonMapper.writeValueAsString(currencyDTO));
-            }
+            response.setStatus(200);
+            response.getWriter().write(jsonMapper.writeValueAsString(currencyDTO));
         } catch (CustomServiceException e) {
             ErrorHandler.sendError(response, e.getErrorCode(), e.getMessage());
         } catch (Exception e) {

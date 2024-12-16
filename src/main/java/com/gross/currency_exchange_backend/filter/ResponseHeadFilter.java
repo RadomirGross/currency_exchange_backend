@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/currency", "/currency*","/currencies","/exchangeRates","/exchangeRate/*"})
+@WebFilter(urlPatterns = {"/currency", "/currency*","/currencies","/exchangeRates","/exchangeRate/*","/exchange"})
 public class ResponseHeadFilter implements Filter {
 
     @Override
