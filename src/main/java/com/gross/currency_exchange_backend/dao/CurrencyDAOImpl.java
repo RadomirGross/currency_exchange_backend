@@ -1,6 +1,6 @@
 package com.gross.currency_exchange_backend.dao;
 
-import com.gross.currency_exchange_backend.exceptions.CustomServiceException;
+
 import com.gross.currency_exchange_backend.model.Currency;
 import com.gross.currency_exchange_backend.utils.SessionFactory;
 

@@ -2,7 +2,6 @@ package com.gross.currency_exchange_backend.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 @Data

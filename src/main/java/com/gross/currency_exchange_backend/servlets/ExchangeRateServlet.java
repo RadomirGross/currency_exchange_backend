@@ -8,7 +8,6 @@ import com.gross.currency_exchange_backend.mapper.ExchangeRateMapper;
 import com.gross.currency_exchange_backend.service.ExchangeRateService;
 import com.gross.currency_exchange_backend.service.ExchangeRateServiceImpl;
 import com.gross.currency_exchange_backend.utils.ErrorHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ import java.math.BigDecimal;
 public class ExchangeRateServlet extends HttpServlet {
     private final ExchangeRateService exchangeRateService;
     private final ObjectMapper jsonMapper;
-    private ExchangeRateMapper mapper;
+    public final ExchangeRateMapper mapper;
 
     public ExchangeRateServlet()  {
         exchangeRateService=new ExchangeRateServiceImpl(new ExchangeRateDAOImpl());
@@ -30,7 +29,7 @@ public class ExchangeRateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         try{
             response.setStatus(200);
             response.getWriter().write(jsonMapper.writeValueAsString(exchangeRateService.getAllExchangeRates()));
@@ -41,7 +40,7 @@ public class ExchangeRateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
        try{
            String baseCurrencyCode=request.getParameter("baseCurrencyCode");
            String targetCurrencyCode=request.getParameter("targetCurrencyCode");

@@ -7,7 +7,6 @@ import com.gross.currency_exchange_backend.exceptions.CustomServiceException;
 import com.gross.currency_exchange_backend.service.CurrencyService;
 import com.gross.currency_exchange_backend.service.CurrencyServiceImpl;
 import com.gross.currency_exchange_backend.utils.ErrorHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +26,7 @@ public class CurrencyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         try {
             List<CurrencyDTO> currencies = currencyService.getAllCurrencies();
             response.setStatus(200);
@@ -40,7 +39,7 @@ public class CurrencyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         String code = request.getParameter("code");
         String name = request.getParameter("name");
         String sign = request.getParameter("sign");

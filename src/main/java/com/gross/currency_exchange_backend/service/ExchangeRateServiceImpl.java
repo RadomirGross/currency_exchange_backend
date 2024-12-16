@@ -2,14 +2,13 @@ package com.gross.currency_exchange_backend.service;
 
 import com.gross.currency_exchange_backend.dao.CurrencyDAOImpl;
 import com.gross.currency_exchange_backend.dao.ExchangeRateDAO;
-import com.gross.currency_exchange_backend.dao.ExchangeRateDAOImpl;
+
 import com.gross.currency_exchange_backend.dto.CurrencyDTO;
 import com.gross.currency_exchange_backend.dto.ExchangeRateDTO;
 import com.gross.currency_exchange_backend.exceptions.CustomServiceException;
 import com.gross.currency_exchange_backend.mapper.ExchangeRateMapper;
 import com.gross.currency_exchange_backend.mapper.ExchangeRateMapperImpl;
-import com.gross.currency_exchange_backend.model.Currency;
-import com.gross.currency_exchange_backend.model.ExchangeRate;
+
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -42,7 +41,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         int[] ids = validateCurrencyCodes(path);
         int baseId = ids[0];
         int targetId = ids[1];
-        ExchangeRateDTO exchangeRateDTO = new ExchangeRateDTO();
+        ExchangeRateDTO exchangeRateDTO;
         try {
             exchangeRateDTO=mapper.toDto(exchangeRateDAO.getExchangeRate(baseId, targetId));
         } catch (SQLException e) {

@@ -6,7 +6,6 @@ import com.gross.currency_exchange_backend.model.ExchangeResult;
 import com.gross.currency_exchange_backend.service.ExchangeResultService;
 import com.gross.currency_exchange_backend.service.ExchangeResultServiceImpl;
 import com.gross.currency_exchange_backend.utils.ErrorHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public class ExchangeResultServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String baseCurrencyCode = request.getParameter("from");
             String targetCurrencyCode = request.getParameter("to");

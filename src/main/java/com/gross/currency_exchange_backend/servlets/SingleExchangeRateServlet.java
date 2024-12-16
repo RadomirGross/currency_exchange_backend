@@ -21,7 +21,7 @@ import java.math.BigDecimal;
 public class SingleExchangeRateServlet extends HttpServlet {
     private final ExchangeRateService exchangeRateService;
     private final ObjectMapper jsonMapper;
-    private ExchangeRateMapper mapper;
+    private final ExchangeRateMapper mapper;
 
     public SingleExchangeRateServlet() {
         exchangeRateService = new ExchangeRateServiceImpl(new ExchangeRateDAOImpl());
@@ -30,7 +30,7 @@ public class SingleExchangeRateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String path = request.getPathInfo().substring(1).toUpperCase();
             ExchangeRateDTO exchangeRate = exchangeRateService.getExchangeRate(path);
@@ -53,7 +53,7 @@ public class SingleExchangeRateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPatch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPatch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             String path = getPathFromRequest(request);
             String rateString = extractRateFromRequest(request);
@@ -68,7 +68,7 @@ public class SingleExchangeRateServlet extends HttpServlet {
         }
     }
 
-    private BigDecimal getRateFromString(String rateString) throws IOException {
+    private BigDecimal getRateFromString(String rateString) {
         try {
             return new BigDecimal(rateString);
         } catch (NumberFormatException e) {

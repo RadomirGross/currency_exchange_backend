@@ -7,7 +7,6 @@ import com.gross.currency_exchange_backend.exceptions.CustomServiceException;
 import com.gross.currency_exchange_backend.service.CurrencyService;
 import com.gross.currency_exchange_backend.service.CurrencyServiceImpl;
 import com.gross.currency_exchange_backend.utils.ErrorHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ public class SingleCurrencyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String path = request.getPathInfo();
         String code = path.substring(1).toUpperCase();
         try {

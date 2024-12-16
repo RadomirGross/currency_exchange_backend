@@ -3,7 +3,6 @@ package com.gross.currency_exchange_backend.service;
 import com.gross.currency_exchange_backend.dto.ExchangeRateDTO;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ExchangeRateService {
