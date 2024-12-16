@@ -1,0 +1,42 @@
+plugins {
+  id 'java'
+  id 'war'
+  id 'io.freefair.lombok' version '8.1.0'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  junitVersion = '5.11.0'
+}
+
+
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+  sourceCompatibility = '20' // Исходная версия
+  targetCompatibility = '20' // Целевая версия
+}
+
+dependencies {
+
+  providedCompile  'jakarta.servlet:jakarta.servlet-api:6.1.0'
+  implementation 'org.postgresql:postgresql:42.7.3'
+  implementation 'com.zaxxer:HikariCP:6.2.1'
+  compileOnly 'org.projectlombok:lombok:1.18.30'
+  annotationProcessor  'org.projectlombok:lombok:1.18.30'
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+  implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+  annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+useJUnitPlatform()}

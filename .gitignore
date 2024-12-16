@@ -44,3 +44,6 @@
 *.zip
 *.tar
 *.rar
+/.gradle/
+/target/
+/gradle/
