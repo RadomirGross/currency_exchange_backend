@@ -19,12 +19,12 @@ services:
       - currency_network
 
   frontend:
-    image: grossradomir/currency_exchange:frontend-1.1
+    image: grossradomir/currency_exchange:frontend-1.3
     container_name: currency_frontend
     ports:
       - "80:80"
     environment:
-          - API_HOST=http://176.113.82.42:8080
+      - API_HOST=http://176.113.82.42:8080
     networks:
       - currency_network
 

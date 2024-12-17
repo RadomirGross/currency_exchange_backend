@@ -56,6 +56,9 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     public ExchangeRateDTO addExchangeRate(String baseCurrencyCode, String targetCurrencyCode, BigDecimal rate)  {
         int baseCurrencyId = validateCurrencyCode(baseCurrencyCode);
         int targetCurrencyId = validateCurrencyCode(targetCurrencyCode);
+        if (baseCurrencyCode.equals(targetCurrencyCode)) {
+            throw new CustomServiceException("В курсе обмена должны быть разные валюты",409);
+        }
         validateRate(rate);
         try {return mapper.toDto(exchangeRateDAO.addExchangeRate(baseCurrencyId,targetCurrencyId,rate));}
         catch (SQLException e) {
