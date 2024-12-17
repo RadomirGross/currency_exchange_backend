@@ -11,7 +11,7 @@ public class SessionFactory {
 
     static {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/currency_db"); // URL вашей базы данных
+        config.setJdbcUrl("jdbc:postgresql://db:5432/currency_db"); // URL вашей базы данных
         config.setUsername("myuser"); // Имя пользователя
         config.setPassword("mypassword"); // Пароль
         config.setDriverClassName("org.postgresql.Driver"); // Класс драйвера PostgreSQL

@@ -16,7 +16,7 @@ public class ResponseHeadFilter implements Filter {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
 
         }
