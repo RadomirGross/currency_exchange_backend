@@ -15,6 +15,10 @@ public class ResponseHeadFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH");
+            response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }

@@ -26,7 +26,7 @@ public class CurrencyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             List<CurrencyDTO> currencies = currencyService.getAllCurrencies();
             response.setStatus(200);
@@ -39,17 +39,15 @@ public class CurrencyServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String code = request.getParameter("code");
         String name = request.getParameter("name");
         String sign = request.getParameter("sign");
 
         try {
-            if (currencyService.getCurrencyByCode(code) == null) {
-                CurrencyDTO savedCurrency = currencyService.addCurrency(code, name, sign);
-                response.setStatus(201);
-                response.getWriter().write(jsonMapper.writeValueAsString(savedCurrency));
-            } else throw new CustomServiceException("Валюта с таким кодом уже существует", 409);
+            CurrencyDTO savedCurrency = currencyService.addCurrency(code, name, sign);
+            response.setStatus(201);
+            response.getWriter().write(jsonMapper.writeValueAsString(savedCurrency));
         } catch (CustomServiceException e) {
             ErrorHandler.sendError(response, e.getErrorCode(), e.getMessage());
         } catch (Exception e) {

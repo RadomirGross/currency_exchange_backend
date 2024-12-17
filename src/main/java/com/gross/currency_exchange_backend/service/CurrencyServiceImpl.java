@@ -37,8 +37,7 @@ public class CurrencyServiceImpl implements CurrencyService {
             Currency currency=currencyDAO.getCurrencyByCode(code);
             if(currency!=null){
                 return currencyMapper.toDto(currency);
-            }else
-                throw new CustomServiceException("Валюта с кодом "+code+" не найдена", 404);
+            }else return null;
         } catch (SQLException e) {
             throw new CustomServiceException("Ошибка при получении валюты", 500);
         }
@@ -47,8 +46,11 @@ public class CurrencyServiceImpl implements CurrencyService {
     @Override
     public CurrencyDTO addCurrency(String code, String name, String sign) {
         validateCurrencyCode(code);
-        validateParameter(sign, SIGN_LENGTH, "Обозначение валюты");
-        validateParameter(name, NAME_LENGTH, "Название валюты");
+        validateParameter(sign, SIGN_LENGTH, "обозначения валюты");
+        validateParameter(name, NAME_LENGTH, "названия валюты");
+        if (getCurrencyByCode(code) != null) {
+            throw new CustomServiceException("Валюта с кодом "+code+" уже существует",409);
+        }
         Currency currency = new Currency(code, name, sign);
         try {
             return currencyMapper.toDto(currencyDAO.addCurrency(currency));
@@ -68,6 +70,6 @@ public class CurrencyServiceImpl implements CurrencyService {
         if (param == null || param.isEmpty())
             throw new CustomServiceException(parameterName + " не должен(-o) быть null или Empty", 400);
         if (param.length() > length)
-            throw new CustomServiceException("Длина кода валют не должна превышать " + length + " символа(-ов)", 400);
+            throw new CustomServiceException("Длина "+parameterName+" не должна превышать " + length + " символа(-ов)", 400);
     }
 }

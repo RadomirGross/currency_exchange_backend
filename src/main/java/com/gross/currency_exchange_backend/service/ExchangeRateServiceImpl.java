@@ -41,7 +41,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         int[] ids = validateCurrencyCodes(path);
         int baseId = ids[0];
         int targetId = ids[1];
-        ExchangeRateDTO exchangeRateDTO;
+        ExchangeRateDTO exchangeRateDTO=null;
         try {
             exchangeRateDTO=mapper.toDto(exchangeRateDAO.getExchangeRate(baseId, targetId));
         } catch (SQLException e) {
@@ -99,9 +99,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
 
     public void validateRate(BigDecimal rate)
     {
-        if (rate==null)
-            throw new CustomServiceException("Rate не может быть равным 0",409);
-        if (rate.compareTo(BigDecimal.ZERO) == 0)
+        if (rate==null || rate.compareTo(BigDecimal.ZERO)==0)
             throw new CustomServiceException("Rate не может быть равным 0",409);
         if (rate.compareTo(BigDecimal.ZERO) < 0)
             throw new CustomServiceException("Rate не может быть меньше 0",409);
